@@ -118,14 +118,14 @@ Authorization: Bearer <your.jwt.token>
 ```bash
 curl -X POST http://localhost:8080/register \
   -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"password123"}'
+  -d '{"email":"test@example.com","password":"yourpassword"}'
 ```
 
 ### Login
 ```bash
 curl -X POST http://localhost:8080/login \
   -H "Content-Type: application/json" \
-  -d '{"email":"test@example.com","password":"password123"}'
+  -d '{"email":"test@example.com","password":"yourpassword"}'
 ```
 
 <img src="images/screenshot1.png" alt="register and login terminal output" width="700"/>
@@ -163,6 +163,7 @@ You can run the tests using:
 go test ./utils
 ```
 Output:
+
 <img src="images/screenshot2.png" alt="jwt and hash test outputs" width="600"/>
 
 ---
