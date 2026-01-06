@@ -2,13 +2,31 @@ package utils
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
 )
 
-var jwtKey = []byte(os.Getenv("JWT_SECRET")) // Load from environment
+var jwtKey []byte
+
+func init() {
+	InitJWTKey()
+}
+
+// InitJWTKey initializes the JWT key from environment variable
+// Can be called from tests to reinitialize with a test key
+func InitJWTKey() {
+	secret := os.Getenv("JWT_SECRET")
+	if secret == "" {
+		log.Fatal("JWT_SECRET environment variable is required")
+	}
+	if len(secret) < 32 {
+		log.Fatal("JWT_SECRET must be at least 32 characters long for security")
+	}
+	jwtKey = []byte(secret)
+}
 
 func GenerateJWT(userID uint) (string, error) {
 	claims := &jwt.RegisteredClaims{

@@ -53,12 +53,25 @@ git clone https://github.com/ashworth3/jwt-auth-system.git
 cd jwt-auth-system
 ```
 
-### 2. Install dependencies / clean
+### 2. Set up environment variables
+Create a `.env` file in the root directory (or export the variable):
+```bash
+export JWT_SECRET="your-super-secret-key-at-least-32-characters-long"
+```
+
+Or create a `.env` file:
+```bash
+JWT_SECRET=your-super-secret-key-at-least-32-characters-long
+```
+
+**Important**: The JWT_SECRET must be at least 32 characters long for security.
+
+### 3. Install dependencies / clean
 ```bash
 go mod tidy
 ```
 
-### 3. Run the server
+### 4. Run the server
 ```bash
 go run main.go
 ```
@@ -146,7 +159,7 @@ rm jwt-auth-system/auth.db
 ```
 
 Re-run app:
-`go main run.go`
+`go run main.go`
 
 ---
 

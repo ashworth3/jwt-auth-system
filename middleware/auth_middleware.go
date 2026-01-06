@@ -17,8 +17,12 @@ func JWTAuthMiddleware(next http.Handler) http.Handler {
 
 		tokenStr := strings.TrimPrefix(authHeader, "Bearer ")
 		claims, err := utils.ParseJWT(tokenStr)
-		if err != nil || claims.ExpiresAt.Time.Before(time.Now()) {
+		if err != nil {
 			http.Error(w, "Invalid token", http.StatusUnauthorized)
+			return
+		}
+		if claims == nil || claims.ExpiresAt.Time.Before(time.Now()) {
+			http.Error(w, "Invalid or expired token", http.StatusUnauthorized)
 			return
 		}
 
